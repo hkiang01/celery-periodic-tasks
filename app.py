@@ -10,5 +10,5 @@ def my_task():
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(10.0, my_task.s(), name='test every 10')
+    # Calls my_task() every 10 seconds.
+    sender.add_periodic_task(10.0, my_task.s(), name='my_task every 10')
