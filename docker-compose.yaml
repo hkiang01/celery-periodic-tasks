@@ -1,6 +1,14 @@
 version: '3'
 services:
-  app:
-    build: .
   redis:
     image: "redis:alpine"
+  celery-beat:
+    build: .
+    command: celery -A app beat -l info
+    depends_on:
+      - redis
+  app:
+    build: .
+    depends_on:
+      - redis
+    command: celery -A app worker --loglevel=info
